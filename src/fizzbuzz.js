@@ -1,8 +1,8 @@
 "use strict";
 // export class FizzBuzzer {
-Object.defineProperty(exports, "__esModule", { value: true });
+exports.__esModule = true;
 //     constructor(){}
-exports.fizzBuzz = (number) => {
+exports.fizzBuzz = function (number) {
     console.log("number", number);
     if (isDivisible(number, 5) && isDivisible(number, 3)) {
         return "FizzBuzz";
@@ -17,10 +17,12 @@ exports.fizzBuzz = (number) => {
         return number;
     }
 };
-let isDivisible = (number, divisor) => {
+var isDivisible = function (number, divisor) {
     return (number % divisor === 0);
 };
-let numberPrinter = () => {
+var numberPrinter = function (limit) {
+    for (var i = 0; i < limit; i++) {
+        console.log(exports.fizzBuzz(i));
+    }
 };
-console.log(exports.fizzBuzz(5));
-//# sourceMappingURL=fizzbuzz.js.map
+numberPrinter(100);

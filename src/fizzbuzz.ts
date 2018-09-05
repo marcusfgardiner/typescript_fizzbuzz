@@ -22,8 +22,10 @@ let isDivisible = (number: number, divisor: number) : boolean => {
     return (number % divisor === 0)
 }
 
-let numberPrinter = () => {
-
+let numberPrinter = (limit: number) => {
+    for (let i = 0; i < limit; i++) {
+        console.log(fizzBuzz(i))
+    }
 }
 
-console.log(fizzBuzz(5))
+numberPrinter(100)
