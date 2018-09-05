@@ -1,6 +1,8 @@
 export class FizzBuzzer {
 
-    constructor() { }
+    constructor( public defaultLimit: number = 100) {
+        this.defaultLimit = defaultLimit
+    }
 
     fizzBuzz = (number: number): string | number => {
         console.log("number", number)
@@ -22,7 +24,7 @@ export class FizzBuzzer {
         return (number % divisor === 0)
     }
 
-    numberPrinter = (limit: number) => {
+    numberPrinter = (limit: number = this.defaultLimit) => {
         for (let i = 0; i < limit; i++) {
             console.log(this.fizzBuzz(i))
         }
@@ -30,4 +32,4 @@ export class FizzBuzzer {
 }
 
 let fizzBuzzer = new FizzBuzzer();
-fizzBuzzer.numberPrinter(100)
+fizzBuzzer.numberPrinter()
