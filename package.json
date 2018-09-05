@@ -13,7 +13,7 @@
     "typescript": "^3.0.3"
   },
   "scripts": {
-    "test": "mocha -r ts-node/register ./*.spec.ts"
+    "test": "mocha -r ts-node/register ./spec/*.spec.ts"
   },
   "repository": {
     "type": "git",

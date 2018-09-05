@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const fizzbuzz_1 = require("./fizzbuzz");
+const fizzbuzz_1 = require("../src/fizzbuzz");
 const chai_1 = require("chai");
 require("mocha");
 describe('CracklePop', () => {
