@@ -5,18 +5,18 @@ export class FizzBuzzer {
     }
 
     fizzBuzz = (number: number): string | number => {
-        console.log("number", number)
-        if (this.isDivisible(number, 5) && this.isDivisible(number, 3)) {
-            return "FizzBuzz"
+        let fizzyString: string = ""
+        if (this.isDivisible(number, 3)) {
+            fizzyString += "Fizz"
         }
-        else if (this.isDivisible(number, 5)) {
-            return "Buzz"
+        if (this.isDivisible(number, 5)) {
+            fizzyString += "Buzz"
         }
-        else if (this.isDivisible(number, 3)) {
-            return "Fizz"
+        if (fizzyString === "") {
+            return number
         }
         else {
-            return number
+            return fizzyString
         }
     }
 

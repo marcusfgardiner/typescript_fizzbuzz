@@ -4,18 +4,18 @@ class FizzBuzzer {
     constructor(defaultLimit = 100) {
         this.defaultLimit = defaultLimit;
         this.fizzBuzz = (number) => {
-            console.log("number", number);
-            if (this.isDivisible(number, 5) && this.isDivisible(number, 3)) {
-                return "FizzBuzz";
+            let fizzyString = "";
+            if (this.isDivisible(number, 3)) {
+                fizzyString += "Fizz";
             }
-            else if (this.isDivisible(number, 5)) {
-                return "Buzz";
+            if (this.isDivisible(number, 5)) {
+                fizzyString += "Buzz";
             }
-            else if (this.isDivisible(number, 3)) {
-                return "Fizz";
+            if (fizzyString === "") {
+                return number;
             }
             else {
-                return number;
+                return fizzyString;
             }
         };
         this.isDivisible = (number, divisor) => {
