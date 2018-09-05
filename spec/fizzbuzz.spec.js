@@ -52,7 +52,7 @@ describe('CracklePop', () => {
         chai_1.expect(actualFizzBuzzes).to.deep.equal(expectedFizzBuzzes);
     });
     it('returns the original number for all other cases', () => {
-        inputValues = [14, 32, 71];
+        inputValues = [17, 32, 71];
         const actualNumbers = inputValues.map(val => fizzbuzzer.fizzBuzz(val));
         chai_1.expect(actualNumbers).to.deep.equal(inputValues);
     });

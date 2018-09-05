@@ -12,6 +12,9 @@ export class FizzBuzzer {
         if (this.isDivisible(number, 5)) {
             fizzyString += "Buzz"
         }
+        if (this.isDivisible(number, 7)) {
+            fizzyString += "Bang"
+        }
         if (fizzyString === "") {
             return number
         }
