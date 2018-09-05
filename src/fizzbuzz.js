@@ -1,28 +1,56 @@
 "use strict";
-// export class FizzBuzzer {
-exports.__esModule = true;
-//     constructor(){}
-exports.fizzBuzz = function (number) {
-    console.log("number", number);
-    if (isDivisible(number, 5) && isDivisible(number, 3)) {
-        return "FizzBuzz";
+Object.defineProperty(exports, "__esModule", { value: true });
+class FizzBuzzer {
+    constructor() {
+        this.fizzBuzz = (number) => {
+            console.log("number", number);
+            if (this.isDivisible(number, 5) && this.isDivisible(number, 3)) {
+                return "FizzBuzz";
+            }
+            else if (this.isDivisible(number, 5)) {
+                return "Buzz";
+            }
+            else if (this.isDivisible(number, 3)) {
+                return "Fizz";
+            }
+            else {
+                return number;
+            }
+        };
+        this.isDivisible = (number, divisor) => {
+            return (number % divisor === 0);
+        };
+        this.numberPrinter = (limit) => {
+            for (let i = 0; i < limit; i++) {
+                console.log(this.fizzBuzz(i));
+            }
+        };
     }
-    else if (isDivisible(number, 5)) {
-        return "Buzz";
-    }
-    else if (isDivisible(number, 3)) {
-        return "Fizz";
-    }
-    else {
-        return number;
-    }
-};
-var isDivisible = function (number, divisor) {
-    return (number % divisor === 0);
-};
-var numberPrinter = function (limit) {
-    for (var i = 0; i < limit; i++) {
-        console.log(exports.fizzBuzz(i));
-    }
-};
-numberPrinter(100);
+}
+exports.FizzBuzzer = FizzBuzzer;
+// export let fizzBuzz = (number: number) : string|number => {
+//     console.log("number", number)
+//     if (isDivisible(number, 5) && isDivisible(number, 3)) {
+//         return "FizzBuzz"
+//     }
+//     else if (isDivisible(number, 5)) {
+//         return "Buzz"
+//     }
+//     else if (isDivisible(number, 3)) {
+//         return "Fizz"
+//     }
+//     else {
+//         return number
+//     }
+// }
+// let isDivisible = (number: number, divisor: number) : boolean => {
+//     return (number % divisor === 0)
+// }
+// let numberPrinter = (limit: number) => {
+//     for (let i = 0; i < limit; i++) {
+//         console.log(fizzBuzz(i))
+//     }
+// }
+let fizzBuzzer = new FizzBuzzer();
+fizzBuzzer.numberPrinter(100);
+//# sourceMappingURL=fizzbuzz.js.map
