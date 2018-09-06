@@ -51,7 +51,7 @@ describe('CracklePop', () => {
         const expectedFezzes = inputValues.map(val => "Fezz");
         chai_1.expect(actualFezzes).to.deep.equal(expectedFezzes);
     });
-    it('returns FezzBuzz for multiples of 13', () => {
+    it('returns FezzBuzz for multiples of 13 and 5', () => {
         inputValues = [65, 130];
         const actualFezzBuzzes = inputValues.map(val => fizzbuzzer.fizzBuzz(val));
         const expectedFezzBuzzes = inputValues.map(val => "FezzBuzz");

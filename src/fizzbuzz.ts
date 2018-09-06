@@ -1,42 +1,36 @@
 export class FizzBuzzer {
 
-    constructor( public defaultLimit: number = 100) {
+    constructor( public defaultLimit: number = 100, public fizzyArray: string[] = []) {
         this.defaultLimit = defaultLimit
     }
 
     fizzBuzz = (number: number): string => {
-        let fizzyArray: string[] = []
+        this.fizzyArray = []
         let fizzyString: string
         let isFezz: boolean
-        if (this.isDivisible(number, 3)) {
-            fizzyArray.push("Fizz")
+        let stringRules: object = {"Fizz": 3, "Fezz": 13, "Buzz": 5, "Bang": 7, "Bong": 11}
+        if (this.isDivisible(number, 11) && !this.isDivisible(number, 13)) {
+            return "Bong"
         }
-        if (this.isDivisible(number, 13)) {
-            isFezz = true
-            fizzyArray.push("Fezz")
-        }
-        if (this.isDivisible(number, 5)) {
-            fizzyArray.push("Buzz")
-        }
-        if (this.isDivisible(number, 7)) {
-            fizzyArray.push("Bang")
-        }
-        if (this.isDivisible(number, 11)) {
-            if (isFezz) {
-                fizzyArray = ["Fezz", "Bong"]
-            }
-            else {
-                fizzyArray = ["Bong"]
-            }
+        for(let rule in stringRules) {
+            let divisor: number = stringRules[rule]
+            let string: string = rule
+            this.divisibleAddString(string, divisor, number)
         }
         if (this.isDivisible(number, 17)) {
-            fizzyArray = fizzyArray.reverse()
+            this.fizzyArray = this.fizzyArray.reverse()
         }
-        if (fizzyArray.length === 0) {
-            fizzyArray.push(number.toString())
+        if (this.fizzyArray.length === 0) {
+            this.fizzyArray.push(number.toString())
         }
-        fizzyString = fizzyArray.join('')
+        fizzyString = this.fizzyArray.join('')
         return fizzyString
+    }
+
+    divisibleAddString = (string: string, divisor: number, number: number) => {
+        if(this.isDivisible(number, divisor)) {
+            this.fizzyArray.push(string)
+        }
     }
 
     isDivisible = (number: number, divisor: number): boolean => {

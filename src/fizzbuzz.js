@@ -1,41 +1,37 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 class FizzBuzzer {
-    constructor(defaultLimit = 100) {
+    constructor(defaultLimit = 100, fizzyArray = []) {
         this.defaultLimit = defaultLimit;
+        this.fizzyArray = fizzyArray;
         this.fizzBuzz = (number) => {
-            let fizzyArray = [];
+            this.fizzyArray = [];
             let fizzyString;
             let isFezz;
-            if (this.isDivisible(number, 3)) {
-                fizzyArray.push("Fizz");
+            let stringRules = { "Fizz": 3, "Fezz": 13, "Buzz": 5, "Bang": 7, "Bong": 11 };
+            // enum Rules {Fizz: 3, Fezz: 13, Buzz: 5, Bang: 7, Bong: 11}
+            console.log(stringRules);
+            if (this.isDivisible(number, 11) && !this.isDivisible(number, 13)) {
+                return "Bong";
             }
-            if (this.isDivisible(number, 13)) {
-                isFezz = true;
-                fizzyArray.push("Fezz");
-            }
-            if (this.isDivisible(number, 5)) {
-                fizzyArray.push("Buzz");
-            }
-            if (this.isDivisible(number, 7)) {
-                fizzyArray.push("Bang");
-            }
-            if (this.isDivisible(number, 11)) {
-                if (isFezz) {
-                    fizzyArray = ["Fezz", "Bong"];
-                }
-                else {
-                    fizzyArray = ["Bong"];
-                }
+            for (let rule in stringRules) {
+                let divisor = stringRules[rule];
+                let string = rule;
+                this.divisibleAddString(string, divisor, number);
             }
             if (this.isDivisible(number, 17)) {
-                fizzyArray = fizzyArray.reverse();
+                this.fizzyArray = this.fizzyArray.reverse();
             }
-            if (fizzyArray.length === 0) {
-                fizzyArray.push(number.toString());
+            if (this.fizzyArray.length === 0) {
+                this.fizzyArray.push(number.toString());
             }
-            fizzyString = fizzyArray.join('');
+            fizzyString = this.fizzyArray.join('');
             return fizzyString;
+        };
+        this.divisibleAddString = (string, divisor, number) => {
+            if (this.isDivisible(number, divisor)) {
+                this.fizzyArray.push(string);
+            }
         };
         this.isDivisible = (number, divisor) => {
             return (number % divisor === 0);
