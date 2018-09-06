@@ -4,23 +4,39 @@ export class FizzBuzzer {
         this.defaultLimit = defaultLimit
     }
 
-    fizzBuzz = (number: number): string | number => {
-        let fizzyString: string = ""
+    fizzBuzz = (number: number): string => {
+        let fizzyArray: string[] = []
+        let fizzyString: string
+        let isFezz: boolean
         if (this.isDivisible(number, 3)) {
-            fizzyString += "Fizz"
+            fizzyArray.push("Fizz")
+        }
+        if (this.isDivisible(number, 13)) {
+            isFezz = true
+            fizzyArray.push("Fezz")
         }
         if (this.isDivisible(number, 5)) {
-            fizzyString += "Buzz"
+            fizzyArray.push("Buzz")
         }
         if (this.isDivisible(number, 7)) {
-            fizzyString += "Bang"
+            fizzyArray.push("Bang")
         }
-        if (fizzyString === "") {
-            return number
+        if (this.isDivisible(number, 11)) {
+            if (isFezz) {
+                fizzyArray = ["Fezz", "Bong"]
+            }
+            else {
+                fizzyArray = ["Bong"]
+            }
         }
-        else {
-            return fizzyString
+        if (this.isDivisible(number, 17)) {
+            fizzyArray = fizzyArray.reverse()
         }
+        if (fizzyArray.length === 0) {
+            fizzyArray.push(number.toString())
+        }
+        fizzyString = fizzyArray.join('')
+        return fizzyString
     }
 
     isDivisible = (number: number, divisor: number): boolean => {

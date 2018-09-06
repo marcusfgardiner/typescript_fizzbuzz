@@ -4,22 +4,38 @@ class FizzBuzzer {
     constructor(defaultLimit = 100) {
         this.defaultLimit = defaultLimit;
         this.fizzBuzz = (number) => {
-            let fizzyString = "";
+            let fizzyArray = [];
+            let fizzyString;
+            let isFezz;
             if (this.isDivisible(number, 3)) {
-                fizzyString += "Fizz";
+                fizzyArray.push("Fizz");
+            }
+            if (this.isDivisible(number, 13)) {
+                isFezz = true;
+                fizzyArray.push("Fezz");
             }
             if (this.isDivisible(number, 5)) {
-                fizzyString += "Buzz";
+                fizzyArray.push("Buzz");
             }
             if (this.isDivisible(number, 7)) {
-                fizzyString += "Bang";
+                fizzyArray.push("Bang");
             }
-            if (fizzyString === "") {
-                return number;
+            if (this.isDivisible(number, 11)) {
+                if (isFezz) {
+                    fizzyArray = ["Fezz", "Bong"];
+                }
+                else {
+                    fizzyArray = ["Bong"];
+                }
             }
-            else {
-                return fizzyString;
+            if (this.isDivisible(number, 17)) {
+                fizzyArray = fizzyArray.reverse();
             }
+            if (fizzyArray.length === 0) {
+                fizzyArray.push(number.toString());
+            }
+            fizzyString = fizzyArray.join('');
+            return fizzyString;
         };
         this.isDivisible = (number, divisor) => {
             return (number % divisor === 0);
