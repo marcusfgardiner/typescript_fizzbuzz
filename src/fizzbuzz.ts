@@ -42,14 +42,18 @@ export class FizzBuzzer {
         this.stringRule(text, existingArray)
     }
 
-    injectBeforeBRule = function (text: string, existingArray: string[]) {
-        let i: string
-        for (i in existingArray) {
-            if (existingArray[i] === "B") {
-                break
-            }
+    injectBeforeBRule = (text: string, existingArray: string[]) => {
+        // Rule for empty arrays
+        if (existingArray.length === 0) {
+            this.stringRule(text, existingArray)
         }
-        existingArray.splice(Number(i), 0, text)
+        else {
+            existingArray.forEach ((item, index, array) => {
+                if ( item[0] === "B" || index === array.length - 1) {
+                    existingArray.splice(Number(index), 0, text)
+                }
+            })
+        }
     }
 
     reverseRule = function (existingArray: string[]) {

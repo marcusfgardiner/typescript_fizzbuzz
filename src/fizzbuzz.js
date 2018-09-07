@@ -24,14 +24,18 @@ class FizzBuzzer {
             existingArray.length = 0;
             this.stringRule(text, existingArray);
         };
-        this.injectBeforeBRule = function (text, existingArray) {
-            let i;
-            for (i in existingArray) {
-                if (existingArray[i] === "B") {
-                    break;
-                }
+        this.injectBeforeBRule = (text, existingArray) => {
+            // Rule for empty arrays
+            if (existingArray.length === 0) {
+                this.stringRule(text, existingArray);
             }
-            existingArray.splice(Number(i), 0, text);
+            else {
+                existingArray.forEach((item, index, array) => {
+                    if (item[0] === "B" || index === array.length - 1) {
+                        existingArray.splice(Number(index), 0, text);
+                    }
+                });
+            }
         };
         this.reverseRule = function (existingArray) {
             existingArray.reverse();
