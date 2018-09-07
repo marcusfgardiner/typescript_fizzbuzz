@@ -3,76 +3,63 @@ Object.defineProperty(exports, "__esModule", { value: true });
 class FizzBuzzer {
     constructor(defaultLimit = 100) {
         this.defaultLimit = defaultLimit;
+        this.applyStringRule = function (text, existingArray) {
+            existingArray.push(text);
+        };
+        this.constructApplyStringRule = function (text) {
+            const returnFunc = ((array) => { this.applyStringRule(text, array); });
+            return returnFunc;
+        };
+        this.applyDeleteRule = function (text, existingArray) {
+            existingArray.length = 0;
+            this.applyStringRule(text, existingArray);
+        };
+        this.constructApplyDeleteRule = function (text) {
+            const returnFunc = ((array) => { this.applyDeleteRule(text, array); });
+            return returnFunc;
+        };
+        this.applyInjectBeforeB = function (text, existingArray) {
+            let i;
+            for (i in existingArray) {
+                if (existingArray[i] === "B") {
+                    break;
+                }
+            }
+            existingArray.splice(Number(i), 0, text);
+        };
+        this.constructInjectBeforeB = function (text) {
+            const returnFunc = ((array) => { this.applyInjectBeforeB(text, array); });
+            return returnFunc;
+        };
+        this.reverseRule = function (existingArray) {
+            existingArray = existingArray.reverse();
+        };
         this.fizzBuzz = (number) => {
             let fizzyArray = [];
             let fizzyString;
             //TODO: combine curry function into single logic that takes in a function
-            const applyStringRule = function (text, existingArray) {
-                existingArray.push(text);
-            };
-            const constructApplyStringRule = function (text) {
-                const returnFunc = ((array) => { applyStringRule(text, array); });
-                return returnFunc;
-            };
-            const applyDeleteRule = function (text, existingArray) {
-                existingArray.length = 0;
-                applyStringRule(text, existingArray);
-            };
-            const constructApplyDeleteRule = function (text) {
-                const returnFunc = ((array) => { applyDeleteRule(text, array); });
-                return returnFunc;
-            };
-            const applyFezzRule = function (text, existingArray) {
-                let i;
-                for (i in existingArray) {
-                    if (existingArray[i] === "B") {
-                        break;
-                    }
-                }
-                existingArray.splice(Number(i), 0, text);
-            };
-            const constructApplyFezzRule = function (text) {
-                const returnFunc = ((array) => { applyFezzRule(text, array); });
-                return returnFunc;
-            };
-            let rules = [
-                { divisor: 3, action: constructApplyStringRule("Fizz") },
-                { divisor: 5, action: constructApplyStringRule("Buzz") },
-                { divisor: 7, action: constructApplyStringRule("Bang") },
-                { divisor: 11, action: constructApplyDeleteRule("Bong") },
-                { divisor: 13, action: constructApplyFezzRule("Fezz") }
+            // const constructRule = function (text: string, object) {   
+            // }
+            let divisorRules = [
+                { divisor: 3, action: this.constructApplyStringRule("Fizz") },
+                { divisor: 5, action: this.constructApplyStringRule("Buzz") },
+                { divisor: 7, action: this.constructApplyStringRule("Bang") },
+                { divisor: 11, action: this.constructApplyDeleteRule("Bong") },
+                { divisor: 13, action: this.constructInjectBeforeB("Fezz") },
+                { divisor: 17, action: this.reverseRule },
             ];
-            rules.forEach(rule => {
+            divisorRules.forEach(rule => {
                 if (this.isDivisible(number, rule.divisor)) {
                     // This is where the array (second argument) is fed in!
                     rule.action(fizzyArray);
                 }
             });
-            // if (this.isDivisible(number, 11) && !this.isDivisible(number, 13)) {
-            //     return "Bong"
-            // }
-            // // addStrings()
-            // for (let rule in stringRules) {
-            //     let divisor: number = stringRules[rule]
-            //     let string: string = rule
-            //     this.divisibleAddString(string, divisor, number)
-            // }
-            // // reverseArray()
-            // if (this.isDivisible(number, 17)) {
-            //     this.fizzyArray = this.fizzyArray.reverse()
-            // }
-            // // numberCheck()
-            // if (this.fizzyArray.length === 0) {
-            //     this.fizzyArray.push(number.toString())
-            // }
+            if (fizzyArray.length === 0) {
+                this.applyStringRule(String(number), fizzyArray);
+            }
             fizzyString = fizzyArray.join('');
             return fizzyString;
         };
-        // divisibleAddString = (string: string, divisor: number, number: number) => {
-        //     if(this.isDivisible(number, divisor)) {
-        //         this.fizzyArray.push(string)
-        //     }
-        // }
         this.isDivisible = (number, divisor) => {
             return (number % divisor === 0);
         };
