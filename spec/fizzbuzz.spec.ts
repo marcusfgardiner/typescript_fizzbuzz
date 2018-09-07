@@ -3,7 +3,7 @@ import { expect } from 'chai';
 import 'mocha';
 
 
-describe('CracklePop', () => {
+describe('FizzBuzz', () => {
     let fizzbuzzer: FizzBuzzer
     let inputValues: number[]
 

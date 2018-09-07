@@ -1,6 +1,9 @@
+type Rule =  (text: string, array: string[]) => void;
+type Action = (array: string[]) => void;
+
 export class FizzBuzzer {
 
-    public divisorRules: { divisor: number; action: any }[]
+    public divisorRules: { divisor: number; action: Action }[]
 
     constructor(public defaultLimit: number = 100) {
         this.defaultLimit = defaultLimit
@@ -14,7 +17,18 @@ export class FizzBuzzer {
         ];
     }
 
-    constructCurriedRule = function (rule: any, text: string) {
+    fizzBuzz = (number: number): string => {
+        let fizzyArray: string[] = []
+        this.divisorRules.forEach(rule => {
+            if (this.isDivisible(number, rule.divisor)) {
+                rule.action(fizzyArray);
+            }
+        })
+        this.numberRule(number, fizzyArray)
+        return fizzyArray.join('')
+    }
+
+    constructCurriedRule = function (rule: Rule, text: string) {
         const returnFunc = ((array) => { rule(text, array); });
         return returnFunc;
     }
@@ -39,25 +53,13 @@ export class FizzBuzzer {
     }
 
     reverseRule = function (existingArray: string[]) {
-        existingArray = existingArray.reverse()
+        existingArray.reverse()
     }
 
     numberRule = (number: number, array: string[]) => {
         if (array.length === 0) {
             this.stringRule(String(number), array)
         }
-    }
-
-    fizzBuzz = (number: number): string => {
-        let fizzyArray: string[] = []
-
-        this.divisorRules.forEach(rule => {
-            if (this.isDivisible(number, rule.divisor)) {
-                rule.action(fizzyArray);
-            }
-        })
-        this.numberRule(number, fizzyArray)
-        return fizzyArray.join('')
     }
 
     isDivisible = (number: number, divisor: number): boolean => {
@@ -73,5 +75,3 @@ export class FizzBuzzer {
 
 let fizzBuzzer = new FizzBuzzer();
 fizzBuzzer.numberPrinter()
-
-// console.log('ANSWER', fizzBuzzer.fizzBuzz(110))

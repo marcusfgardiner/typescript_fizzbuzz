@@ -3,6 +3,16 @@ Object.defineProperty(exports, "__esModule", { value: true });
 class FizzBuzzer {
     constructor(defaultLimit = 100) {
         this.defaultLimit = defaultLimit;
+        this.fizzBuzz = (number) => {
+            let fizzyArray = [];
+            this.divisorRules.forEach(rule => {
+                if (this.isDivisible(number, rule.divisor)) {
+                    rule.action(fizzyArray);
+                }
+            });
+            this.numberRule(number, fizzyArray);
+            return fizzyArray.join('');
+        };
         this.constructCurriedRule = function (rule, text) {
             const returnFunc = ((array) => { rule(text, array); });
             return returnFunc;
@@ -24,22 +34,12 @@ class FizzBuzzer {
             existingArray.splice(Number(i), 0, text);
         };
         this.reverseRule = function (existingArray) {
-            existingArray = existingArray.reverse();
+            existingArray.reverse();
         };
         this.numberRule = (number, array) => {
             if (array.length === 0) {
                 this.stringRule(String(number), array);
             }
-        };
-        this.fizzBuzz = (number) => {
-            let fizzyArray = [];
-            this.divisorRules.forEach(rule => {
-                if (this.isDivisible(number, rule.divisor)) {
-                    rule.action(fizzyArray);
-                }
-            });
-            this.numberRule(number, fizzyArray);
-            return fizzyArray.join('');
         };
         this.isDivisible = (number, divisor) => {
             return (number % divisor === 0);
@@ -63,5 +63,4 @@ class FizzBuzzer {
 exports.FizzBuzzer = FizzBuzzer;
 let fizzBuzzer = new FizzBuzzer();
 fizzBuzzer.numberPrinter();
-// console.log('ANSWER', fizzBuzzer.fizzBuzz(110))
 //# sourceMappingURL=fizzbuzz.js.map
